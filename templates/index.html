@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Screenshot Viewer</title>
+    <style>
+        #screenshots{
+            display: flex;
+            flex-wrap: wrap; /* 允许子项换行 */
+            justify-content: center; /* 水平居中 */
+        }
+        .screenshot-container {
+            margin: 0 10px 20px 10px; /* 添加一些底部外边距以分隔不同组的图片 */
+        }
+        .screenshot-container img {
+            width: 720px;
+            height: auto;
+            display: block; /* 使图片下方不产生额外的空间 */
+            margin: 0 auto 10px; /* 上边距和左边距为0，下边距为10px，自动居中 */
+        }
+        .screenshot-container p {
+            text-align: center; /* 使文件名居中显示 */
+            margin: 0; /* 移除默认的段落外边距 */
+        }
+    </style>
+</head>
+<body>
+<div id="screenshots">
+    {% for screenshot in screenshots %}
+    <div class="screenshot-container">
+        <img src="{{ url_for('uploaded_file', filename=screenshot) }}" alt="Screenshot">
+        <p>{{screenshot}}</p>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>
