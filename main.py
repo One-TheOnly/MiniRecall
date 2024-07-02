@@ -23,7 +23,7 @@ def screenshot_job():
 
 
 def run_scheduled_screenshots():
-    # 配置截图间隔时间（例如：每30分钟）  
+    # 配置截图间隔时间（例如：每30分钟）
     schedule.every(10).minutes.do(screenshot_job)
     while True:
         schedule.run_pending()
@@ -34,7 +34,7 @@ def run_flask_server():
     # 确保截图目录存在  
     if not os.path.exists(screenshots_folder):
         os.makedirs(screenshots_folder)
-    app.run(debug=True, threaded=True)  # 开启多线程模式以支持同时处理多个请求  
+    app.run(debug=False, threaded=True)  # 开启多线程模式以支持同时处理多个请求
 
 
 @app.route('/')
@@ -52,7 +52,7 @@ def uploaded_file(filename):
 
 if __name__ == "__main__":
     # 立即执行一次截图
-    # openrecallcapture_screenshot()
+    capture_screenshot()
 
     # 创建并启动截图任务的线程  
     screenshot_thread = threading.Thread(target=run_scheduled_screenshots)
